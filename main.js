@@ -3,6 +3,7 @@ var py = 50;
 var vx = 0.0; // Velocity x and y
 var vy = 0.0;
 var updateRate = 1/60; // Sensor refresh rate
+const data = document.getElementById('data');
 
 function getAccel(){
     DeviceMotionEvent.requestPermission().then(response => {
@@ -11,6 +12,7 @@ function getAccel(){
            // in the alpha-beta-gamma axes (units in degrees)
             window.addEventListener('deviceorientation',(event) => {
                 // Expose each orientation angle in a more readable way
+                data.innerHTML = event
                 rotation_degrees = event.alpha;
                 frontToBack_degrees = event.beta;
                 leftToRight_degrees = event.gamma;
@@ -33,9 +35,6 @@ function getAccel(){
                     vy = 0;
                 }
                 
-                dot = document.getElementsByClassName("indicatorDot")[0]
-                dot.setAttribute('style', "left:" + (px) + "%;" +
-                                              "top:" + (py) + "%;");
                 
             });
         }
